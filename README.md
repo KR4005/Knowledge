@@ -1,6 +1,6 @@
 # README
 
-## 初めに
+## イントロダクション
 
 日々学んだことや作業の記録を残していく
 
@@ -13,34 +13,92 @@
 - メモツールに依存しない
   - PARAメソッドは方法論であり、特定のツールに縛られることはなく、(NotionやEvernoteなど)、普段使っているツールから容易に導入が可能。
 
-参考
-<https://fortelabs.com/blog/para/>
-<https://gigazine.net/news/20220509-para-method/>
-
 ## 運用
 
 以下のルールに基づいてファイル及びディレクトリを管理する
 
 ### 00_Project
 
-具体的な目標や締め切りが存在するメモを管理
-"ホームページの作成" のようなプロジェクトの進捗や成果に関連するメモがここに属する
+- 概要: 明確な目標と期限がある一時的な活動
+  - 新しいLinuxサーバーのセットアップ手順の作成
+  - Gitのベストプラクティスに関するガイドの作成
+  - 特定のプロジェクトで使用するスクリプトの開発
 
 ### 01_Area
 
-Area of Responsibilityの略
-目標や締め切りがなく、長期的に管理するものが属する。
-ロードマップや継続的に使用するメモなど、具体的な目標や期限はないが長期的な管理が必要なものがここに属する。
-`00_Project` と似ているが、大きい違いとしては期限と目標の明確の有無が挙げられる。
-目標と期限がはっきりするものは `00_Project` として管理、大きい方向性は決まっているが期限が決まっていないものは `01_Area` として管理
-行動に応じて、`01_Area` の中から細かい目標や期間を設定後、`00_Project` に移動して管理する。
+- 概要: 継続的に管理する必要がある責任領域
+  - 継続的なLinuxの学習
+  - Gitの操作に関するトレーニング
+  - 定期的なツールやコマンドの更新とメンテナンス
 
 ### 02_Resource
 
-関心があるものを管理
-具体的な目標がないが有益な情報が属する
+- 概要: プロジェクトやエリアに直接関連しないが、将来的に役立つ可能性のある参考資料
+  - Linuxコマンドリファレンス
+  - Gitのチュートリアルやドキュメント
+  - よく使うスクリプトや設定ファイルのサンプル
 
 ### 03_Archive
 
-期間が経過したものや関心がなくなったものなどを管理
-不要な情報をArchiveとして保管し、整理された状態で必要な情報を取り出す
+- 概要: 完了したプロジェクトや不要になったリソースの保管場所
+  - 完了したLinuxのセットアップ手順
+  - 古いGitプロジェクトのドキュメント
+  - 使わなくなったスクリプトや設定ファイル
+
+## 実際のフォルダ構造の例
+
+```text
+PARA/
+├── Projects/
+│   ├── Linux Setup Guide/
+│   │   ├── README.md
+│   │   └── setup_steps.md
+│   ├── Git Best Practices/
+│   │   ├── README.md
+│   │   └── best_practices.md
+│   └── Script Development/
+│       ├── README.md
+│       └── scripts/
+├── Areas/
+│   ├── Linux Learning/
+│   │   ├── basics.md
+│   │   └── advanced.md
+│   ├── Git Training/
+│   │   ├── basics.md
+│   │   └── advanced.md
+│   └── Tool Maintenance/
+│       ├── updates.md
+│       └── tools_list.md
+├── Resources/
+│   ├── Linux Reference/
+│   │   ├── commands.md
+│   │   └── tips.md
+│   ├── Git Tutorials/
+│   │   ├── beginner.md
+│   │   └── advanced.md
+│   └── Sample Scripts/
+│       ├── script1.sh
+│       └── script2.sh
+└── Archives/
+    ├── Completed Linux Guides/
+    │   ├── setup_guide_v1.md
+    │   └── setup_guide_v2.md
+    ├── Old Git Documents/
+    │   ├── best_practices_2019.md
+    │   └── training_2020.md
+    └── Deprecated Scripts/
+        ├── old_script1.sh
+        └── old_script2.sh
+
+```
+
+## 各フォルダの詳細
+
+- Projects (プロジェクト)
+  - 各プロジェクトごとにフォルダを作成し、その中に関連するドキュメントやファイルをまとめます。プロジェクトが完了したら、Archivesフォルダに移動
+- Areas (エリア)
+  - 継続的に学習や管理が必要な分野に関する情報を整理。例えば、LinuxやGitに関する学習資料やメンテナンス情報を保存
+- Resources (リソース)
+  - 直接的なプロジェクトやエリアには関連しないが、将来的に役立つ可能性のある資料やサンプルを保存。参考になるリファレンスやチュートリアル、サンプルスクリプトなどがここに含まれます。
+- Archives (アーカイブ)
+  - 完了したプロジェクトや不要になったリソースを保管。将来的に参照する可能性があるため、ここに保存

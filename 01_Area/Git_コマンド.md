@@ -12,6 +12,7 @@
   - [origin](#origin)
   - [ローカルとリモートの関係](#ローカルとリモートの関係)
   - [基本的な操作](#基本的な操作)
+  - [ブランチ作成からコミット、プッシュまでの流れ](#ブランチ作成からコミットプッシュまでの流れ)
   - [新しいリポジトリを作成](#新しいリポジトリを作成)
   - [直近のコミットを修正しプッシュする](#直近のコミットを修正しプッシュする)
   - [競合のパターン](#競合のパターン)
@@ -93,7 +94,7 @@ origin は、Git リポジトリでよく使用されるデフォルトのリモ
 
 リモートリポジトリを `clone` してファイル編集・追加後、`staging`, `commit`, `push` する方法
 
-```shell
+```bash
 # リモートリポジトリをクローンするディレクトリに移動
 cd /path/directory_name
 
@@ -116,9 +117,33 @@ git commit -m "commit-message"
 git push origin [branch-name]
 ```
 
+## ブランチ作成からコミット、プッシュまでの流れ
+
+```bash
+ver="1.0.0"
+branch="Release/${ver}"
+repo="https://github.com/KR4005/"
+
+git clone https://github.com/KR4005/${repo}.git
+cd ${repo}
+git bransh -d ${branch}
+
+**ファイルの編集・作成**
+
+git add -all
+git status -s
+git commit -m "commit ${ver}"
+git tag ${ver}
+git log -1
+
+git push origin ${branch}
+git push origin --tags
+git log -1
+```
+
 ## 新しいリポジトリを作成
 
-```shell
+```bash
 # 新しいリポジトリを作成したいディレクトリを作成
 mkdir my-new-repo
 cd my-new-repo
@@ -140,7 +165,7 @@ git push origin main
 
 ## 直近のコミットを修正しプッシュする
 
-```shell
+```bash
 # すべての変更をステージングエリアに追加する
 git add --all
 
@@ -172,7 +197,7 @@ git push --force origin <branch-name>
 
 ## プルする前に事前に競合しないか確認
 
-```shell
+```bash
 # リモートの変更を取得
 git fetch origin
 
@@ -182,7 +207,7 @@ git diff HEAD..origin/main
 
 ## 競合が発生した場合にローカルをリモートのもので上書き
 
-```shell
+```bash
 git fetch origin
 git reset --hard origin/main
 ```
@@ -191,7 +216,7 @@ git reset --hard origin/main
 
 ## プッシュ 及び プルで競合が発生した場合
 
-```shell
+```bash
 git reset --hard HEAD@{1}
 ```
 
@@ -199,7 +224,7 @@ git reset --hard HEAD@{1}
 
 ## タグのの追加 及び 削除
 
-```shell
+```bash
 # タグのローカルへの付け方
 git tag -a v1.0 -m "Version 1.0"
 
@@ -210,7 +235,7 @@ git tag v1.0
 git push origin v1.0
 ```
 
-```shell
+```bash
 # タグの削除
 git tag -d v1.0
 
@@ -222,7 +247,7 @@ git push origin :refs/tags/v1.0
 
 ブランチ名を省略して現在のブランチに対して操作を行うコマンドは、次のようなものがあります
 
-```shell
+```bash
 # ブランチ名を省略した場合、現在のブランチが変更されません。代わりに、以前にチェックアウトしたブランチに戻ります。
 git checkout
 
@@ -237,7 +262,7 @@ git merge
 
 ## git reset 等で誤ってコミットを削除してしまった場合
 
-```shell
+```bash
 # 間違ってコミットを取り消した場合、以前の状態に戻す
 git reflog
 # 取り消したコミットのコミットIDを確認し、復元する
@@ -246,7 +271,7 @@ git reset --hard <取り消したコミットのコミットID>
 
 ## 新しいコミットで HEAD が移動した場合
 
-```shell
+```bash
 # HEAD の移動履歴を表示
 git reflog
 # 間違ってHEADを移動させた場合、以前の位置に戻す
@@ -255,7 +280,7 @@ git reset --hard HEAD@{1}
 
 ## 誤ってブランチを削除してしまった場合
 
-```shell
+```bash
 # 間違って削除したブランチを復元する例
 git reflog
 # 削除したブランチのコミットIDを確認し、復元する
@@ -264,7 +289,7 @@ git checkout -b <復元したいブランチ名> <削除したブランチのコ
 
 ## git reset
 
-```shell
+```bash
 # コミットされていない、ステージニングされた変更をワーキングツリーに戻す
 git reset
 
@@ -282,7 +307,7 @@ git reset コマンドでコミットハッシュを指定しない場合は、�
 
 ## git add
 
-```shell
+```bash
 # どのファイルがステージングされるかを表示
 git add -n
 
@@ -295,24 +320,24 @@ git add -i
 
 ## git cloen
 
-```shell
+```bash
 # 既存のリポジトリをクローンする
-git clone [RepositoryURL]
+git clone ${RepositoryURL}
 ```
 
 デフォルトでカレントディレクトリに保存される
 
 ## git branch
 
-```shell
+```bash
 # 現在のリポジトリ上のすべてのローカルブランチを一覧で表示
 git branch
 
 # 新規ブランチを作成
-git branch [BranchName]
+git branch ${Branch}
 
 # 指定されたブランチを削除
-git branch -d [BranchName]
+git branch -d ${Branch}
 
 # リモートブランチを含めた全てのブランチを一覧で表示
 git branch -a
@@ -323,7 +348,7 @@ git branch -r
 
 ## git log
 
-```shell
+```bash
 # 最新のコミット情報を表示
 git log　-1
 
@@ -333,33 +358,33 @@ git log  --all --graph --decorate --oneline
 
 ## git checkout
 
-```shell
+```bash
 # 指定されたブランチに切り替え
-git checkout [BranchName]
+git checkout ${Branch}
+
+# 新しいブランチを作成し、チェックアウト
+git checkout -b ${NewBranch}
 ```
 
 ## git push
 
-```shell
+```bash
 # 現在のブランチをリモートにプッシュ
 git push
 
 # 特定のブランチをリモートにプッシュ
-git push origin [branch-name]
+git push origin ${Branch}
 
 # 強制的にプッシュ
 git push --force
 
-<<COMMENT
-通常は競合を防ぐために慎重に使用すべきです。このオプションは、リモートブランチの履歴を書き換えるため、他の開発者に影響を与える可能性があります。
-COMMENT
+
+**通常は競合を防ぐために慎重に使用すべきです。このオプションは、リモートブランチの履歴を書き換えるため、他の開発者に影響を与える可能性があります。**
 
 # 新しいリモートブランチを作成してプッシュ
-git push origin [local-branch]:[remote-branch]
+git push origin ${LocalBranch}:${RemoteBranch}
 
-<<COMMENT
-強制的にプッシュします。通常は競合を防ぐために慎重に使用すべきです。このオプションは、リモートブランチの履歴を書き換えるため、他の開発者に影響を与える可能性があります。
-COMMENT
+**強制的にプッシュします。通常は競合を防ぐために慎重に使用すべきです。このオプションは、リモートブランチの履歴を書き換えるため、他の開発者に影響を与える可能性があります。**
 
 # すべてのローカルタグをリモートにプッシュ
 git push --tags
@@ -368,7 +393,7 @@ git push --tags
 git push origin --delete [branch-name]
 ```
 
-```shell
+```bash
 git checkout -b feature-branch
 git push -u origin feature-branch
 ```
@@ -377,13 +402,13 @@ git push -u origin feature-branch
 
 git fetch は、リモートリポジトリの最新の変更をローカルに取り込むためのコマンドです。git fetch を使用することで、リモートリポジトリのブランチやタグの最新の状態を取得し、ローカルリポジトリに反映させることができますが、これによりローカルの作業ツリーやブランチは変更されません。
 
-```shell
+```bash
 git fetch
 ```
 
 ## git status
 
-```shell
+```bash
 git status
 ```
 
@@ -391,7 +416,7 @@ git status
 
 ## git reflog
 
-```shell
+```bash
 git reflog
 ```
 
